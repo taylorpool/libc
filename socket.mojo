@@ -1,4 +1,4 @@
-from sys.intrinsics import external_call
+from sys.ffi import external_call
 from memory.memory import stack_allocation
 
 alias c_int = Int32
