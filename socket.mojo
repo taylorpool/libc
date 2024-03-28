@@ -30,7 +30,7 @@ struct Type:
 @register_passable("trivial")
 struct sockaddr_un:
     var sa_family: sa_family_t
-    var sun_path: StaticTuple[108, UInt8]
+    var sun_path: StaticTuple[UInt8, 108]
 
 
 @value
@@ -43,7 +43,7 @@ struct in_addr:
 @value
 @register_passable("trivial")
 struct in6_addr:
-    var s6_addr: StaticTuple[16, UInt8]
+    var s6_addr: StaticTuple[UInt8, 16]
 
 
 @value
@@ -61,7 +61,7 @@ struct sockaddr_in6:
 @register_passable("trivial")
 struct sockaddr:
     var sa_family: sa_family_t
-    var sa_data: StaticTuple[14, UInt8]
+    var sa_data: StaticTuple[UInt8, 14]
 
 
 @always_inline
@@ -136,7 +136,7 @@ fn remove(pathname: Pointer[UInt8]) -> c_int:
 
 @always_inline
 fn socketpair(
-    domain: c_int, type: c_int, protocol: c_int, inout sv: StaticTuple[2, c_int]
+    domain: c_int, type: c_int, protocol: c_int, inout sv: StaticTuple[c_int, 2]
 ) -> c_int:
     return external_call["socketpair", c_int](
         domain, type, protocol, Pointer.address_of(sv[0])
